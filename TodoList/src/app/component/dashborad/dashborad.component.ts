@@ -21,6 +21,7 @@ export class DashboradComponent implements OnInit {
     this.addTaskValue = '';
     this.taskObj = new Task();
     this.taskArr = [];
+    this.getAllTask();
   }
   addTask() {
     this.taskObj.task_name = this.addTaskValue;
@@ -48,6 +49,8 @@ export class DashboradComponent implements OnInit {
 
   editTask() {
     this.taskObj.task_name = this.editTaskValue;
+
+    alert('editing ' + this.editTaskValue);
     this.crudService.editTask(this.taskObj).subscribe({
       next: (res) => {
         console.log(res);
@@ -68,5 +71,10 @@ export class DashboradComponent implements OnInit {
         alert('Failed to delete the task');
       },
     });
+  }
+
+  call(etask: Task) {
+    this.taskObj = etask;
+    this.editTaskValue = etask.task_name;
   }
 }
